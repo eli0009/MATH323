@@ -1,0 +1,90 @@
+\documentclass{article}
+\usepackage{amssymb}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{cancel}
+\author{Enlai Li}
+\title{MATH323 -- Lecture }
+\date{February 2, 2023}
+\begin{document}
+\maketitle
+\section{Geometric probability mass function (p.m.f.)}
+\begin{align*}
+    P(Y=k) = {(1-p)}^{k-1}p          \text{ where } k = 1, 2, \dots                         \\
+    \sum_{k=1}^{\infty} P(Y=k) = 1                                                          \\
+    \mathbb{E}(Y) & = \sum_{k=1}^{\infty} kP(Y=k)                                           \\
+                  & = \sum_{k=1}^{\infty} (1-p)^{k-1}p                                      \\
+                  & = p \sum_{k=1}^{\infty} kq^{k-1}                                        \\
+                  & = p \sum_{k=1}^{\infty} \frac{d}{dq}(q^k)                               \\
+    \sum_{n=i}^{\infty}a_nx ^{n} \text{\indent note: } \sum_{n=1}^{\infty} \frac{(-1)^n}{n} \\
+                  & = p \frac{d}{dq}[\sum_{k=1}^{\infty} q^k]                               \\
+                  & = p \frac{d}{dq}[\frac{q}{1-q}]                                         \\
+                  & = p \frac{1 \times (1-q) + q}{(1-q)^2}                                  \\
+                  & = p \frac{1 }{(1-q)^2}                                                  \\
+                  & = \cancel{p} \frac{1}{p^x}                                              \\
+                  & = \frac{1}{p}                                                           \\
+    \mathbb{E}(Y) = \frac{1}{p}
+\end{align*}
+
+\begin{align*}
+    \binom{49}{6}                                      \\
+    p = \frac{1}{\binom{49}{6}}                        \\
+    \mathbb{E}(Y) = \binom{49}{6}                      \\
+    2 \times 52.5 = 105                                \\
+    \binom{49}{6} = 13,983,816                         \\
+    \frac{\binom{49}{6}}{105} = \frac{13,983,816}{105} \\
+    = 133,180 \text{ games}
+\end{align*}
+
+\begin{align*}
+    V(Y)               & = \mathbb{E}(Y^2) - [\mathbb{E}(Y)]^2         \\
+    \mathbb{E}(Y^2)    & = \mathbb{E}[Y(Y-1)] + \mathbb{E}[Y]          \\
+    \mathbb{E}[Y(Y-1)] & = \sum_{k=1}^{\infty}k(k-1)P(y=k)             \\
+                       & = \sum_{k=1}^{\infty}k(k-1)q ^{k-1}p          \\
+                       & = pq \sum_{k=1}^{\infty}k(k-1)q ^{k-2}        \\
+                       & = pq \frac{d^2}{dq^2}[\sum_{k=1}^{\infty}q^k] \\
+    V(Y) = \frac{(1-p)}{p^2}
+\end{align*}
+
+\subsection{Negative Binomial Distribution}
+Notation: $Bin(n,p)$, $Geo(P)$, $NB(r,p)$
+\[
+    X_i = \begin{cases}
+        1 & p   \\
+        0 & 1-p
+    \end{cases}
+\]
+\underline{r} successes:
+\begin{align*}
+    r       \\
+    Y & = K
+\end{align*}
+There is at least 2 success. Consider K boxes filled with 0, there is a success box
+with 1 at position K. There is $r-1$ boxes, corresponding to $k-1$ boxes, it then becomes
+\begin{gather*}
+    \binom{k-1}{r-1}p^rq ^{k-r}                                                        \\
+    P(Y=k)             = \binom{k-1}{r-1}p^rq ^{k-r} \text{ where } k = r, r+1, \dots \\
+    q                  = 1-p                                                          \\
+    (\frac{1}{1-x})^r  = \sum_{k=r}^{\infty} \binom{k-1}{r-1} x ^{k-r} \text{ where }
+    0 < x < 1 \\
+    \boxed{ \sum_{k=r}^{\infty} P ( Y=K) = p^r \sum_{k=r}^{\infty}\binom{k-1}{r-1} q ^{k-r}} \\
+    = p^r (\frac{1}{1-q})^r \\
+    =1
+\end{gather*}
+
+If $Y \sim NB(r,p)$ then
+\begin{gather*}
+    \mathbb{E}(Y) = \frac{r}{p} \\
+    V(Y) = \frac{r(1-p)}{p^2} \\
+    Y \sim NB (r, p) \\
+    Y = \sum_{i=1}^{r} X_i \text{ where } X_i \stackrel{ind}{\sim} Geo(P)
+\end{gather*}
+
+If $Y \sim Bin(n,p)$ then $Y = \sum_{i=1}^{n}X_i$,
+$
+    X_i = \begin{cases}
+        1 & p   \\
+        0 & 1-p
+    \end{cases}
+$
+\end{document}
