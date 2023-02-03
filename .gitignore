@@ -1,2 +1,7 @@
-lx.aux lx.fdb_latexmk lx.fls lx.log lx.md lx.pdf lx.synctex.gz lx.tex
-test.pdf test.synctex.gz test.tex
+*.aux
+*.fls
+*.log
+*.synctex.gz
+*fdb_latexmk
+test*
+lx*

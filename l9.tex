@@ -4,7 +4,7 @@
 \usepackage{amsmath}
 \usepackage{cancel}
 \author{Enlai Li}
-\title{MATH323 -- Lecture }
+\title{MATH323 -- Lecture 9}
 \date{February 2, 2023}
 \begin{document}
 \maketitle
@@ -55,19 +55,19 @@ Notation: $Bin(n,p)$, $Geo(P)$, $NB(r,p)$
     \end{cases}
 \]
 \underline{r} successes:
-\begin{align*}
-    r       \\
-    Y & = K
-\end{align*}
+\begin{gather*}
+    r \\
+    Y = K
+\end{gather*}
 There is at least 2 success. Consider K boxes filled with 0, there is a success box
 with 1 at position K. There is $r-1$ boxes, corresponding to $k-1$ boxes, it then becomes
 \begin{gather*}
     \binom{k-1}{r-1}p^rq ^{k-r}                                                        \\
     P(Y=k)             = \binom{k-1}{r-1}p^rq ^{k-r} \text{ where } k = r, r+1, \dots \\
     q                  = 1-p                                                          \\
-    (\frac{1}{1-x})^r  = \sum_{k=r}^{\infty} \binom{k-1}{r-1} x ^{k-r} \text{ where }
-    0 < x < 1 \\
-    \boxed{ \sum_{k=r}^{\infty} P ( Y=K) = p^r \sum_{k=r}^{\infty}\binom{k-1}{r-1} q ^{k-r}} \\
+    \boxed{(\frac{1}{1-x})^r  = \sum_{k=r}^{\infty} \binom{k-1}{r-1} x ^{k-r} \text{ where }
+        0 < x < 1} \\
+    \sum_{k=r}^{\infty} P ( Y=K) = p^r \sum_{k=r}^{\infty}\binom{k-1}{r-1} q ^{k-r} \\
     = p^r (\frac{1}{1-q})^r \\
     =1
 \end{gather*}
@@ -87,4 +87,30 @@ $
         0 & 1-p
     \end{cases}
 $
+
+\subsection{HyperGeometric Distribution}
+$R + B = N$:
+\[
+    \boxed{R \text{\indent } B}
+\]
+Y = \# of rectangles in a sample of size n
+\begin{gather*}
+    S \text{\indent } \binom{N}{n} \\
+    P(Y=r) \\
+    A = \binom{R}{r}\binom{B}{n-r} \\
+    P(Y=r) = \frac{\binom{R}{r}\binom{B}{n-r}}{\binom{N}{n}} \text{, where } r = 0,1,2,\dots , n \\
+    Y \sim H \mathbb{G}(N,M,n) \\
+    P(Y=r) = \frac{\binom{M}{r}\binom{N-M}{n-r}}{\binom{N}{n}} \text{, where }
+    r = 0,1,2, \dots , n
+\end{gather*}
+
+Take $n$ balls:
+\begin{gather*}
+    Y = \sum_{i=1}^{n} X_i \\
+    X_i = \begin{cases}
+        1 \\
+        0
+    \end{cases}
+\end{gather*}
+
 \end{document}
