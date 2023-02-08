@@ -13,5 +13,132 @@
 \date{February 7, 2023}
 \begin{document}
 \maketitle
+\section{HyperGeometric}
+\begin{itemize}
+    \item [N:] size of population
+    \item [M:] size of subpopulation of interest
+    \item [n:] sample size
+    \item [Y:] \# of tagged fish in the sample of size n
+
+\end{itemize}
+\begin{gather*}
+    H \mathbb{G}(N,M,n)\\
+    \mathbb{E} (Y) = \frac{nM}{N}\\
+    V(Y) = n (\frac{M}{N} )(1-\frac{M}{N} )(\frac{N-n}{N-1} )
+\end{gather*}
+
+\boxed{R \quad B}
+\begin{itemize}
+    \item [M:] \# of red balls in the bag
+    \item [N:] \# of blue balls in the bag
+\end{itemize}
+
+\begin{gather*}
+    x _{i} = \begin{cases}
+        1 & R \\
+        0 & B
+    \end{cases}
+    \\
+    Y = \sum_{i=1}^{n} X _{i} \\
+    x _{1}, \dots , x_n\\
+    P(x _{i} = 1) = \frac{M}{N}  = P \\
+    Z = \sum_{i=1}^{n} X _{i} \sim Bin(n,p)\\
+    Y = \sum_{i=1}^{n} X _{i}  \sim H \mathbb{G}(N,M,n)\\
+    \mathbb{E} (Y) = \mathbb{E} [\sum_{1}^{n} X _{i} ] = \sum_{i=1}^{n} X _{i} \mathbb{E} (x_i)\\
+    \mathbb{E} [Y] = \frac{nM}{N} \\
+    P(Y=k) = \frac{\binom{M}{K} \binom{N-M}{n-k}}{\binom{N}{n}} \text{, where } k = 0,1, \dots n\\
+    \sum_{k=0}^{n} P(Y=k) \stackrel{?}{=} 1\\
+    \sum_{k=0}^{n} \frac{\binom{M}{K} \binom{N-M}{n-k}}{\binom{N}{n}} \stackrel{?}{=} 1\\
+    \sum_{k=0}^{n} \binom{M}{K} \binom{N-M}{n-k} = \binom{N}{n} \\
+    P(x_1 = 1) = \frac{M}{N}\\
+    \text{We take a second ball without looking at the color:}\\
+    P(x_2 = 1) = P(x_2 = 1 \ \vert \ x_1=1)P(x_1 = 1) + P(x_2=1|x_1=0)P(x_1 = 0)\\
+    = \frac{M-1}{N-1} \times \frac{M}{N} + \frac{M}{N-1}(1- \frac{M}{N} ) \\
+    = \frac{M(M-1)}{N(N-1)} +  \frac{M(N-M)}{N(N-1)} \\
+    = \frac{-M+MN}{N(N-1)} \\
+    = \frac{M}{N}
+\end{gather*}
+
+The probability does not change, what changes is the independence:
+\begin{align*}
+    P(x _{i} = 1) & = \frac{M}{N}, i = 1,2, \dots ,n       \\
+    p(X_1=1, x_2=1)
+                  & = P(x_2=1 \ \vert \ x _{1} =1)p(X_1=1) \\
+                  & = \frac{M-1}{N-1} \times \frac{M}{N}   \\
+                  & = \frac{M(M-1)}{N(N-1)}
+\end{align*}
+
+\subsection{Question 3.33, p130}
+\[
+    (1+x)^{N} = (1+x)^M(1+x)^{N-M}
+\]
+A group of 20 peoples (N), 8 black peoples (M), a random sample of 6 people(n), only 1 black person (Y) among the jury. Is there a reason to doubt the randomness?
+\begin{align*}
+    N              & = 20                                                 \\
+    M              & = 8                                                  \\
+    n              & = 6                                                  \\
+    Y              & = 1                                                  \\
+    \mathbb{E} (Y) & = \frac{nM}{N} = \frac{6 \times 8}{20} = 2.4         \\
+    P(Y = 1)       & = \frac{\binom{8}{1} \binom{12}{5} }{\binom{20}{6} } \\
+                   & =0.1634
+\end{align*}
+
+When sample is very big, it does not matter if we return the ball
+\[
+    n (\frac{M}{N} )(1-\frac{M}{N} )(\frac{N-n}{N-1} )
+\]
+\[
+    \lim _{N \rightarrow \infty} \frac{\binom{M}{Z} \binom{N-M}{n-k}}{\binom{N}{n}}
+\]
+\[
+    \rightarrow \binom{n}{k} \frac{M}{N} ^{K} (1-\frac{M}{N} )^{n-k}
+\]
+Radioactive decay: for large n, p is not fixed and vary with n
+\[
+    \binom{n}{k} p ^{k}_{n}(1-p_n)^{n-k}
+\]
+\[
+    np_n \rightarrow \lambda \text{, as } n \rightarrow \infty
+\]
+1.
+\begin{align*}
+    \lim _{N \rightarrow \infty} \frac{n(n-1) \dots (n-k+1)}{n \times n \dots \times n}
+     & = lim \prod _{g=0} ^{k-1} (\frac{n-j}{n} )                                            \\
+     & = lim  _{N \rightarrow \infty}  \prod _{j=0} ^{k-1} (\frac{1-j}{n} )                  \\
+     & = \prod _{j=0} ^{k-1} \underbrace{lim  _{N \rightarrow \infty}  (\frac{1-j}{n} )}_{1} \\
+     & = \prod _{j=0} ^{k} a _j = a_0 \times a_1 \dots a_k
+\end{align*}
+
+2.
+\begin{align*}
+    lim  _{N \rightarrow \infty} (1-\frac{\lambda}{n}) ^{n}
+     & = e ^{-\lambda}                                                           \\
+    lim  _{N \rightarrow \infty} (1-\frac{\lambda}{n}) ^{-k}
+     & = e ^{-\lambda}                                                           \\
+    lim  _{N \rightarrow \infty} \binom{n}{k} p _{n}^{k} (1-p) ^{n-k}
+     & = \frac{\lambda ^{k} e ^{- \lambda}}{k!} \text{ If } np_n \approx \lambda
+\end{align*}
+\begin{gather*}
+    \lim _{N \rightarrow \infty} \binom{n}{k} (\frac{\lambda}{n}) ^k (1-\frac{\lambda}{n}) ^{n-k} \\
+    =
+    \lim _{N \rightarrow \infty} \frac{n!}{k!(n-k)!} \times   \frac{\lambda^k}{n^k} (1-\frac{\lambda}{n}) ^{n-k} \\
+    =
+    \frac{\lambda^k}{k!} \lim _{N \rightarrow \infty} \frac{n(n-1) \dots (n-k+1)}{n \times n \dots \times n} (1-\frac{\lambda}{n}) ^n (1-\frac{\lambda}{n}) ^{-k} \\
+\end{gather*}
+
+\subsection{Approximation of binomial}
+\begin{gather*}
+    np_n \approx \lambda \text{ and } n \rightarrow \infty \\
+    P(x=k) = \frac{\lambda ^{k} e ^{- \lambda}}{k!}, k=0,1,\dots
+\end{gather*}
+Poisson p.m.f
+\begin{align*}
+    \sum_{k=0}^{\infty} P(x=k) & \stackrel{?}{=} 1                                               \\
+    \sum_{k=0}^{\infty} P(x=k) & = \sum_{k=0}^{\infty} \frac{\lambda ^{k} e ^{- \lambda}}{k!}    \\
+                               & = e ^{-\lambda} \sum_{k=0}^{\infty} \frac{\lambda ^{k}}{k!} = 1 \\
+    e ^{x}                     & = \sum_{n=0}^{\infty} \frac{x^n}{n!}
+\end{align*}
+if $x \sim P_0 (\lambda)$
+
 
 \end{document}
